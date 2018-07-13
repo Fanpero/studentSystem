@@ -9,4 +9,8 @@ accountRouter.get('/login',accountCTRL.getLoginPage);
 
 accountRouter.get('/vcode',accountCTRL.getVcodeImg);
 
+accountRouter.get('/register',accountCTRL.getRegisterPage);
+
+accountRouter.post('/register',accountCTRL.register);
+
 module.exports = accountRouter;
