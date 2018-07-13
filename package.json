@@ -1,0 +1,24 @@
+{
+  "name": "studentSystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fanpero/studentSystem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fanpero/studentSystem/issues"
+  },
+  "homepage": "https://github.com/Fanpero/studentSystem#readme",
+  "dependencies": {
+    "captchapng": "0.0.1",
+    "express": "^4.16.3"
+  }
+}
