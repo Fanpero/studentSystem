@@ -13,4 +13,6 @@ accountRouter.get('/register',accountCTRL.getRegisterPage);
 
 accountRouter.post('/register',accountCTRL.register);
 
+accountRouter.post('/login',accountCTRL.login);
+
 module.exports = accountRouter;

@@ -15,7 +15,10 @@ exports.getLoginPage = (req,res) => {
 }
 
 exports.getVcodeImg = (req,res) => {
-    const random = parseInt(Math.random()*9000+1000)
+    const random = parseInt(Math.random()*9000+1000);
+
+    req.session.vcode = random;
+
     var p = new captchapng(80,30,random); // width,height,numeric captcha
         p.color(0, 0, 0, 0);  // First color: background (red, green, blue, alpha)
         p.color(80, 80, 80, 255); // Second color: paint (red, green, blue, alpha)
@@ -60,6 +63,39 @@ exports.register = (req,res) => {
                     res.json(flag);
                 })
             }
+        })
+    })
+}
+
+exports.login = (req,res) => {
+    const flag = {status: 0,message: '登陆成功'};
+
+    // 获取请求体中的数据
+    const {username,password,vcode} = req.body;
+
+    // 验证验证码
+    if(vcode != req.session.vcode) {
+        flag.status = '1';
+        flag.message = '验证码错误'
+
+        res.json(flag);
+
+        return;
+    }
+
+    MongoClient.connect(url,{userNewUrlParse: true},function (err,client) {
+        const db = client.db(dbName);
+
+        const accountInfo = db.collection('accountInfo');
+
+        accountInfo.findOne({username,password},(err,doc) => {
+            if(doc == null) {
+                flag.status = 2;
+                flag.message = '用户名或密码错误';
+            }
+
+            client.close();
+            res.json(flag);
         })
     })
 }
